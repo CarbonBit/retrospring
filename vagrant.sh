@@ -26,7 +26,7 @@ cp config/justask.yml.example config/justask.yml
 cp config/database/yml.postgres config/database.yml
 
 echo "Setting up database"
-bundle exec db:setup RAILS_ENV=production
+bundle exec rake db:setup RAILS_ENV=production
 
 echo "Compiling assets"
 bundle exec rake assets:precompile RAILS_ENV=production
