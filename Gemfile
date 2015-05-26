@@ -60,6 +60,7 @@ gem 'twitter'
 gem 'tumblr_client'
 
 gem 'foreman'
+gem 'foreman-export-initscript'
 gem 'redis'
 
 group :development do

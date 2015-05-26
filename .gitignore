@@ -28,3 +28,6 @@ coverage/
 # lookin' at you, OS trash
 .DS_Store
 Thumbs.DB
+
+# vagrant
+.vagrant
