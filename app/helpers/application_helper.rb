@@ -165,4 +165,39 @@ module ApplicationHelper
   def group_title(group)
     generate_title group.name
   end
+
+  # NOTE: when adding new flags, add data here
+  def get_flag_info
+    {
+      # "permanently_banned" => {
+      #   key:   "banned",             # overriding, would be "permanently_banned"
+      #   icon:  "fa-ban",             # no icon if not defined
+      #   class: "panel-badge-default" # badge class, defaults to panel-badge-default
+      # }, # commented because we use more than just the flag.
+      "admin" => {
+        icon:  "fa-flask",
+        class: "panel-badge-danger"
+      },
+      "moderator" => {
+        icon: "fa-users",
+        class: "panel-badge-success"
+      },
+      "supporter" => {
+        icon: "fa-star",
+        class: "panel-badge-warning"
+      },
+      "contributor" => {
+        icon: "fa-github",
+        class: "panel-badge-primary"
+      },
+      "blogger" => {
+        icon: "fa-pencil",
+        class: "panel-badge-info"
+      },
+      "translator" => {
+        icon: "fa-globe",
+        class: "panel-badge-info"
+      }
+    }
+  end
 end

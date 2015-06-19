@@ -78,6 +78,35 @@ class User < ActiveRecord::Base
     end
   end
 
+  # NOTE: If adding new banners to users, add them here, AT THE END.
+  FLAGSTR = %w(permanently_banned admin moderator supporter blogger contributor translator).freeze
+  FLAGSTR.each_with_index do |method, index|
+    flag = 2 ** index
+    define_method "#{method}" do
+      self.flags & flag
+    end
+
+    define_method "#{method}?" do
+      self.flags & flag > 0
+    end
+
+    define_method "#{method}=" do |value|
+      if value == false
+        self.flags &= ~flag
+      elsif value == true
+        self.flags |= flag
+      end
+    end
+  end
+
+  def flags_to_a
+    a = {}
+    FLAGSTR.each_with_index do |str, index|
+      a[str] = self.flags & (2 ** index) > 0
+    end
+    a
+  end
+
   def login=(login)
     @login = login
   end
