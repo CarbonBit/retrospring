@@ -1,0 +1,26 @@
+@import "variables";
+@import "bootswatch/cosmo/variables";
+@import "bootstrap";
+@import "bootswatch/cosmo/bootswatch";
+@import "base";
+@import "font-awesome";
+
+body { padding-top: $navbar-height; }
+
+.embed-container {
+  padding: 25px;
+}
+
+.container {
+  width: 100% !important;
+}
+
+.navbar-header {
+  float: none;
+}
+
+.navbar-brand {
+  display: block;
+  text-align: center;
+  width: 100%;
+}

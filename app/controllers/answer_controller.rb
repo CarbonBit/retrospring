@@ -1,4 +1,7 @@
 class AnswerController < ApplicationController
+  skip_before_filter :check_locale, only: [:embed]
+  skip_before_filter :banned?, only: [:embed]
+
   def show
     @answer = Answer.find(params[:id])
     @display_all = true
@@ -17,5 +20,12 @@ class AnswerController < ApplicationController
       notif = Notification.where(target_type: "CommentSmile", target_id: @answer.comment_smiles.pluck(:id), recipient_id: current_user.id, new: true)
       notif.update_all(new: false) unless notif.empty?
     end
+  end
+
+  def embed
+    @answer = Answer.find(params[:id])
+    @display_all = true
+    I18n.locale = 'en'
+    render layout: 'embed'
   end
 end
