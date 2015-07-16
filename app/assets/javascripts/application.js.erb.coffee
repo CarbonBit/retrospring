@@ -58,6 +58,11 @@ $(document).on "click", "button#create-account", ->
   Turbolinks.visit "/sign_up"
 
 _ready = ->
+  $('#search_form').submit ->
+    query = $('#q').val()
+    window.location.href = '/search?utf8=✓&q=' + query
+    false
+
   if typeof sweetAlertInitialize != "undefined"
     sweetAlertInitialize()
 

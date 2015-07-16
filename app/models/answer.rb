@@ -1,4 +1,9 @@
+require 'elasticsearch/model'
+
 class Answer < ActiveRecord::Base
+  include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks
+
   belongs_to :user
   belongs_to :question
   has_many :comments, dependent: :destroy
@@ -42,4 +47,19 @@ class Answer < ActiveRecord::Base
   def notification_type(*_args)
     Notifications::QuestionAnswered
   end
+
+  def self.search(query)
+    __elasticsearch__.search(
+        {
+            query: {
+                multi_match: {
+                    query: query,
+                    fields: ['content^10', 'user']
+                }
+            }
+        }
+    )
+  end
 end
+
+Answer.import

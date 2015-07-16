@@ -1,4 +1,9 @@
+require 'elasticsearch/model'
+
 class Question < ActiveRecord::Base
+  include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks
+
   belongs_to :user
   has_many :answers, dependent: :destroy
   has_many :inboxes, dependent: :destroy
@@ -22,4 +27,19 @@ class Question < ActiveRecord::Base
     return false if Inbox.where(question: self).count > 1
     true
   end
+
+  def self.search(query)
+    __elasticsearch__.search(
+        {
+            query: {
+                multi_match: {
+                    query: query,
+                    fields: ['content^10', 'user']
+                }
+            }
+        }
+    )
+  end
 end
+
+Question.import

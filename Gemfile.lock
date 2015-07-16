@@ -105,6 +105,19 @@ GEM
     devise-i18n (0.12.0)
     diff-lcs (1.2.5)
     docile (1.1.5)
+    elasticsearch (1.0.12)
+      elasticsearch-api (= 1.0.12)
+      elasticsearch-transport (= 1.0.12)
+    elasticsearch-api (1.0.12)
+      multi_json
+    elasticsearch-model (0.1.7)
+      activesupport (> 3)
+      elasticsearch (> 0.4)
+      hashie
+    elasticsearch-rails (0.1.7)
+    elasticsearch-transport (1.0.12)
+      faraday
+      multi_json
     equalizer (0.0.11)
     erubis (2.7.0)
     eventmachine (1.0.7)
@@ -491,6 +504,8 @@ DEPENDENCIES
   devise
   devise-async
   devise-i18n
+  elasticsearch-model
+  elasticsearch-rails
   factory_girl_rails
   faker
   fog

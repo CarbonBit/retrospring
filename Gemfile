@@ -63,6 +63,10 @@ gem 'omniauth-tumblr'
 gem 'twitter'
 gem 'tumblr_client'
 
+# ElasticSearch
+gem 'elasticsearch-model'
+gem 'elasticsearch-rails'
+
 gem 'foreman'
 gem 'redis'
 

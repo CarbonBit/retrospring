@@ -1,0 +1,30 @@
+.jumbotron.j2-jumbo.text-center.particle-jumbotron
+  #particles
+  .particle-content
+    %h1 Search
+    %p There finally is one there!
+.container
+  .panel.panel-default
+    .panel-body
+      = bootstrap_form_tag url: search_path, method: :get do |f|
+        %p
+          = f.text_field :q, value: params[:q], label: "Search for:"
+          = f.submit "Search", name: nil, class: "btn btn-default pull-right"
+
+  - if params[:q].blank?
+    %p.text-info.text-center Nothing is showing here yet, since you are not searching anything!
+  - else
+    - @users.each do |user|
+      %p
+        %b Found user:
+        %span= user.display_name
+        %small.text-muted= "@#{user.screen_name}"
+    - @answers.each do |answer|
+      %p
+        %b Found answer:
+        = answer.content
+    - @questions.each do |question|
+      %p
+        %b Found question:
+        = question.content
+

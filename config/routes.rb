@@ -99,6 +99,7 @@ Rails.application.routes.draw do
   match '/notifications(/:type)', to: 'notifications#index', via: :get, as: :notifications, defaults: {type: 'all'}
 
   match '/inbox', to: 'inbox#show', via: 'get'
+  get 'search', to: 'search#search', as: :search
 
   match '/user/:username(/p/:page)', to: 'user#show', via: 'get', defaults: {page: 1}
   match '/@:username(/p/:page)', to: 'user#show', via: 'get', as: :show_user_profile_alt, defaults: {page: 1}

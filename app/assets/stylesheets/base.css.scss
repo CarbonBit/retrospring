@@ -201,3 +201,31 @@ body {
 .discover {
   padding-top: 20px;
 }
+
+.navbar-form input[type=text] {
+  display: inline-block;
+  background: none;
+  border: none;
+  border-bottom: 1px solid #aaa;
+  color: #fff;
+  padding-left: 6px;
+}
+
+@media(min-width: $screen-md-min) {
+  .navbar-form input[type=text] {
+    margin-right: 5px;
+  }
+}
+
+.navbar-form input[type=text]:focus {
+  outline: none;
+  outline-offset: -2px;
+  box-shadow: none !important;
+  outline: 0 !important;
+  outline: -webkit-focus-ring-color auto 5px;
+}
+
+.navbar-form .has-feedback label.sr-only ~ .form-control-feedback {
+  top: 13px;
+  color: #fff;
+}

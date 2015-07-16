@@ -35,6 +35,10 @@
             .btn.btn-link.navbar-btn{name: "toggle-all-ask", "data-target" => "#modal-ask-followers", "data-toggle" => "modal", :type => "button"}
               %i.fa.fa-pencil-square-o
           = render "layouts/profile"
+        %form#search_form.navbar-form.navbar-right
+          = bootstrap_form_tag url: search_path, method: :get, wrapper: {class: "navbar-form navbar-right"}, layout: :inline do |f|
+            = f.text_field :q, value: params[:q], placeholder: "Search", hide_label: true, icon: " fa fa-search"
+            = f.button "Search", name: nil, style: "display: none;", id: "search"
       - else
         %ul.nav.navbar-nav.navbar-right
           = nav_entry t('views.sessions.create'), new_user_session_path
