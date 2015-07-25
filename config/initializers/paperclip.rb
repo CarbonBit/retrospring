@@ -1,0 +1,1 @@
+Paperclip.options[:whiny] = true

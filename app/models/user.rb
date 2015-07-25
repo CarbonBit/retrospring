@@ -233,6 +233,10 @@ class User < ActiveRecord::Base
     !crop_x.blank? && !crop_y.blank? && !crop_w.blank? && !crop_h.blank?
   end
 
+  def cropping_header?
+    !crop_h_x.blank? && !crop_h_y.blank? && !crop_h_w.blank? && !crop_h_h.blank?
+  end
+
   # forwards fill
   def banned?
     self.permanently_banned? or ((not self.banned_until.nil?) and self.banned_until >= DateTime.current)

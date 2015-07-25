@@ -13,14 +13,19 @@ module Paperclip
 
     def crop_command
       target = @attachment.instance
-      if target.cropping?
-        case @attachment.name
-        when :profile_picture
-          ['-auto-orient', '-strip', '+repage', '-crop', "'#{target.crop_w.to_i}x#{target.crop_h.to_i}+#{target.crop_x.to_i}+#{target.crop_y.to_i}'"]
-        when :profile_header
-          ['-auto-orient', '-strip', '+repage', '-crop', "'#{target.crop_h_w.to_i}x#{target.crop_h_h.to_i}+#{target.crop_h_x.to_i}+#{target.crop_h_y.to_i}'"]
-        end
+      if @attachment.name.to_s == 'profile_picture' && target.cropping?
+        ['-auto-orient', '-strip', '+repage', '-crop', "'#{target.crop_w.to_i}x#{target.crop_h.to_i}+#{target.crop_x.to_i}+#{target.crop_y.to_i}'"]
+      elsif @attachment.name.to_s == 'profile_header' && target.cropping_header?
+        ['-auto-orient', '-strip', '+repage', '-crop', "'#{target.crop_h_w.to_i}x#{target.crop_h_h.to_i}+#{target.crop_h_x.to_i}+#{target.crop_h_y.to_i}'"]
       end
+    end
+
+    def convert(arguments = "", local_options = {})
+      # imagick shits crap out to stderr on failure but still returns 0
+      arguments = arguments + ' 2>&1'
+      x = Paperclip.run('convert', arguments, local_options, {swallow_stderr: false})
+      throw x unless x.blank?
+      x
     end
   end
 end
