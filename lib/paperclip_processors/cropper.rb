@@ -22,7 +22,7 @@ module Paperclip
 
     def convert(arguments = "", local_options = {})
       # imagick shits crap out to stderr on failure but still returns 0
-      arguments = arguments + ' 2>&1'
+      arguments = arguments + ' 2>&1 >&-'
       x = Paperclip.run('convert', arguments, local_options, {swallow_stderr: false})
       throw x unless x.blank?
       x
